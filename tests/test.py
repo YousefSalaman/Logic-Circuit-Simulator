@@ -8,8 +8,8 @@ b = comps.ConstOut('Cst2', 1)
 c = comps.Clock('Clk')  # Clock object
 
 # Layer 2
-d = comps.UniversalReg('Reg1', [0, 0, 0, 0])  # Universal Register object
-e = comps.UniversalReg('Reg2', [1, 1, 1, 0])
+d = comps.UniversalReg('Reg1', load_input=[0, 0, 0, 0])  # Universal Register object
+e = comps.UniversalReg('Reg2', load_input=[1, 1, 1, 0])
 
 # Note: The and, or, xor, nor, nand gates in this test are grouped together in one class, but you can do them as
 # individual classes if its more efficient or easier to handle.
