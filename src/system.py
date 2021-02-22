@@ -7,9 +7,9 @@ class DigitalSystem:
     """
     The digital system class. Its role is to evaluate the system.
 
-    It basically runs through every component to get the current output
-    in that run. With that, it creates a file that display how the
-    system was running in each iteration.
+    It basically runs through every component to get the current output in that
+    run. With that, it creates a file that display how the system was running
+    in each iteration.
     """
 
     def __init__(self, name, system_connections, num_of_runs=20):
@@ -23,9 +23,8 @@ class DigitalSystem:
 
     def organize_system(self):
         """
-        This method traverses through the connections it was given
-        to determine an order of execution for the components in
-        the system.
+        This method traverses through the connections it was given to determine
+        an order of execution for the components in the system.
         """
 
         for comp in self.sys_connections:
@@ -36,19 +35,19 @@ class DigitalSystem:
         """
         Run the digital system.
 
-        It creates the simulation text by running the system. The
-        results of these will depend on what components you handed
-        to the system.
+        It creates the simulation text by running the system. The results of
+        these will depend on what components you handed to the system.
 
         It does the following to do this:
 
-        - It creates the simulation header. That is, the starting
+        - It creates the simulation header. That is, the starting 
           text and it shows the components initial conditions.
 
-        - It later runs through each component and gets the current
-          output of the component.
+        - It later runs through each component and gets the current output of
+          the component.
 
-        - With all the information it has gathered, it
+        - With all the information it has gathered, it will build the text file
+          with all the runs of the simulation.
         """
 
         sim_text = self._create_simulation_header()
@@ -94,8 +93,8 @@ class DigitalSystem:
     def _run_components(self):
         """
         To simplify a few things in the code, this method was made into a
-        generator that returns a string of the run of the components. It
-        stop early if it encounters a problem.
+        generator that returns a string of the run of the components. It stops
+        early if it encounters a problem.
         """
 
         run_count = 1
@@ -106,7 +105,9 @@ class DigitalSystem:
                 try:
                     dig_comp.component_output(dig_comp_inputs)
                     run_str += dig_comp.component_print()  # Add output of component to current run string
-                except TypeError:  # This creates the early stop to prevent any invalid data to appear in the simulation
+
+                # This creates an early stop to prevent any invalid data from appearing in the simulation
+                except TypeError:
                     return
             yield f'RUN {run_count}:\n\n\n' + run_str + _LINE_STR
             run_count += 1

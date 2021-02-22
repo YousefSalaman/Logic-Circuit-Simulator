@@ -3,6 +3,23 @@ from .base_comp import DigitalComponent
 
 
 class Switch(DigitalComponent):
+    """
+    Digital switch component.
+
+    This component can behave in 2 ways:
+
+    - On-off switch: In this mode of operation, the switch takes only one
+      component as input. Depending on the route value, the switch will
+      pass on the current value of the input or it will act as a disconnected
+      line. The latter means that it will pass as output the current value
+      it has stored.
+
+    - 2x1 MUX: In this mode of operation, the switch will route 1 of the 2
+      input values.
+
+    To get the first mode of operation, you only connect one input to the
+    switch component. For the other, you connect 2 inputs.
+    """
 
     def __init__(self, name, init_state=0):
 

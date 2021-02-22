@@ -2,15 +2,39 @@ from .base_comp import DigitalComponent
 
 
 class UniversalReg(DigitalComponent):
+    """
+    Universal Shift Register (USR) component.
 
-    def __init__(self, name, size, load_input=None, init_state=0):
+    This component behaves like a USR. It has the has the following pins:
+
+    - s0 and s1: These two pins determine the mode of operation. Here are the
+      possible combinations:
+
+      - s0 = 0 and s1 = 0: Idle state (USR won't do anything)
+
+      - s0 = 0 and s1 = 1: Right shift elements
+
+      - s0 = 1 and s1 = 0: Left shift elements
+      
+      - s0 = 1 and s1 = 1: Parallel shift elements
+      
+    - reg_enable and ctrl_enable: These two pins need to be enabled for the
+      register to operate. 
+      
+    - clear: If this pin is enabled, then the register will get cleared. That
+      is, the register will be now full of 0's.
+    """
+
+    def __init__(self, name, size=None, load_input=None, init_state=0):
 
         super().__init__(name, init_state)
         self.prev_state = (0, 0)
         if load_input:
             self.reg_bits = _RegisterBits(load_input)
-        else:
+        elif size:
             self.reg_bits = _RegisterBits([None] * size)
+        else:
+            raise ValueError('Either "size" or "load_input" have to be specified to create a Register object.')
 
     def component_output(self, inputs):
 
@@ -19,9 +43,8 @@ class UniversalReg(DigitalComponent):
         if clear:  # If the clear input is enabled, then the register resets its internal storage
             self.reg_bits.clear()
         if reg_enable == crtl_enable == 1:  # If the reg_inputs below are active, then the register will change
-            curr_state = (s0, s1)
-            self._reverse_register_bits(curr_state)
             self._register_outputs(s0, s1, reg_inputs)
+            curr_state = (s0, s1)
             if curr_state != (0, 0):
                 self.prev_state = curr_state
 
@@ -38,13 +61,10 @@ class UniversalReg(DigitalComponent):
 
     def _register_outputs(self, s0, s1, reg_inputs):
         """
-        The possible outputs of the register.
-
-        Note that s0 = 1 and s1 = 0 or s0 = 0 and s1 = 1 access
-        the same method instead of having a special case for this.
-        This is because the bits were adjusted/"reversed" to adjust
-        the bits beforehand.
+        In here, you will find the possible outputs of the register.
         """
+
+        self._reverse_register_bits((s0, s1))
 
         if s0 != s1:
             self.output = self.reg_bits.shift_serial(reg_inputs)
@@ -53,7 +73,7 @@ class UniversalReg(DigitalComponent):
 
     def _reverse_register_bits(self, curr_state):
         """
-        This reverses the register bits before applying the appropiate
+        This reverses the register bits before applying the appropriate
         translation with RegisterBits methods.
         """
 
@@ -65,8 +85,8 @@ class _RegisterBits(list):
     """
     Helper class for register.
 
-    This extends some of the funcionalities of the list class,
-    so it behaves like internal registry of a shift register
+    This extends some of the functionalities of the list class, so it behaves
+    like internal registry of a shift register
     """
 
     def __init__(self, register_list):

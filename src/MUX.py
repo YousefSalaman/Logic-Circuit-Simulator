@@ -3,6 +3,20 @@ from .base_comp import DigitalComponent
 
 
 class MUX(DigitalComponent):
+    """
+    A 4x1 MUX component.
+
+    This component routes the data of 1 of 4 inputs depending on the number
+    of the pins in s0 and s1:
+
+    - If s0 = s1 = 0, then the first input will be routed.
+
+    - If s0 = 0 and s1 = 1, then the second input will be routed.
+
+    - If s0 = 1 and s1 = 1, then the third input will be routed.
+
+    - If s0 = s1 = 1, then the fourth input will be routed.
+    """
 
     def __init__(self, name, init_state=0):
 
