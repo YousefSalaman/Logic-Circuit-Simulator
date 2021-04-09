@@ -15,12 +15,12 @@ class UniversalReg(DigitalComponent):
       - s0 = 0 and s1 = 1: Right shift elements
 
       - s0 = 1 and s1 = 0: Left shift elements
-      
+
       - s0 = 1 and s1 = 1: Parallel shift elements
-      
+
     - reg_enable and ctrl_enable: These two pins need to be enabled for the
-      register to operate. 
-      
+      register to operate.
+
     - clear: If this pin is enabled, then the register will get cleared. That
       is, the register will be now full of 0's.
     """
@@ -36,7 +36,7 @@ class UniversalReg(DigitalComponent):
         else:
             raise ValueError('Either "size" or "load_input" have to be specified to create a Register object.')
 
-    def component_output(self, inputs):
+    def run(self, inputs):
 
         s0, s1, reg_enable, crtl_enable, clear, *reg_inputs = inputs
 
@@ -48,9 +48,9 @@ class UniversalReg(DigitalComponent):
             if curr_state != (0, 0):
                 self.prev_state = curr_state
 
-    def component_print(self):
+    def print(self):
 
-        run_str = super().component_print().replace("\n\n", "")
+        run_str = super().print().replace("\n\n", "")
         if self.prev_state == (1, 0):
             self.reg_bits.reverse()
             run_str += f'; Current registry: {self.reg_bits}'

@@ -9,10 +9,10 @@ class Switch(DigitalComponent):
     This component can behave in 2 ways:
 
     - On-off switch: In this mode of operation, the switch takes only one
-      component as input. Depending on the route value, the switch will
-      pass on the current value of the input or it will act as a disconnected
-      line. The latter means that it will pass as output the current value
-      it has stored.
+      component as input. Depending on the route value, the switch will pass
+      on the current value of the input or it will act as a disconnected line.
+      The latter means that it will pass as run the current value it has
+      stored.
 
     - 2x1 MUX: In this mode of operation, the switch will route 1 of the 2
       input values.
@@ -21,11 +21,7 @@ class Switch(DigitalComponent):
     switch component. For the other, you connect 2 inputs.
     """
 
-    def __init__(self, name, init_state=0):
-
-        super().__init__(name, init_state)
-
-    def component_output(self, inputs):
+    def run(self, inputs):
 
         route_value, *comp_inputs = inputs
 
@@ -44,10 +40,10 @@ class Switch(DigitalComponent):
         This switch behaves like a 2x1 MUX hence the name of the method.
 
         - When the route value is 0, the first input will be used as the
-          output of the switch.
+          run of the switch.
 
         - When the route value is 1, the second input will be used as the
-          output of the switch.
+          run of the switch.
         """
 
         if route_value == 0:
@@ -63,7 +59,7 @@ class Switch(DigitalComponent):
           it will take the value of the input.
 
         - Otherwise, the switch is off and it will use the stored value
-          as the output.
+          as the run.
         """
 
         if route_value == 1:  # The on state is represented by 1

@@ -9,12 +9,12 @@ class Gate(DigitalComponent):  # This class uses the commutativity of the logica
     From here, one can create the following gates: AND, OR, XOR, NAND, NOR.
 
     It uses the component's commutativity and the associativity of the AND, OR, XOR gates
-    to simplify the calculations being done. To briefly explain, the output is "calculated"
+    to simplify the calculations being done. To briefly explain, the run is "calculated"
     by looking up the classes look up table. By using the two properties above, one can
     write up all the gates in this one class since they function in a similar manner.
     """
 
-    _truth_table = {"AND": (0, 0, 1),
+    _TRUTH_TABLE = {"AND": (0, 0, 1),
                     "OR": (0, 1, 1),
                     "XOR": (0, 1, 0),
                     "NAND": (1, 1, 0),
@@ -31,13 +31,13 @@ class Gate(DigitalComponent):  # This class uses the commutativity of the logica
 
         try:
             gate = gate.strip().upper()
-            if gate not in self._truth_table:
+            if gate not in self._TRUTH_TABLE:
                 raise AttributeError("The gate parameter that was entered is not a valid gate. "
-                                     f'You must enter one of the following: {", ".join(self._truth_table.keys())}')
+                                     f'You must enter one of the following: {", ".join(self._TRUTH_TABLE)}')
             self.gate = gate
         except AttributeError as error:
             raise AttributeError('The parameter "gate" must be a string and it must be '
-                                 f'one of the following: {", ".join(self._truth_table.keys())}') from error
+                                 f'one of the following: {", ".join(self._TRUTH_TABLE)}') from error
 
     def verify_component_inputs(self, inputs):
 
@@ -51,14 +51,14 @@ class Gate(DigitalComponent):  # This class uses the commutativity of the logica
                                      'cannot receive more than two reg_inputs.')
             self._checked = True
 
-    def component_output(self, inputs):
+    def run(self, inputs):
 
         self.verify_component_inputs(inputs)
 
-        output = self._truth_table[self.gate][inputs[0] + inputs[1]]  # Lookup the value in the truth table
+        output = self._TRUTH_TABLE[self.gate][inputs[0] + inputs[1]]  # Lookup the value in the truth table
 
         # Since some of the components are associative, I can continually use the previous value and a new input to get
         # or lookup the new value for the component
         for comp_input in inputs[2:]:
-            output = self._truth_table[self.gate][output + comp_input]
+            output = self._TRUTH_TABLE[self.gate][output + comp_input]
         self.output = output

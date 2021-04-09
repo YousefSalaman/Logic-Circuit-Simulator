@@ -26,23 +26,23 @@ Layer 5:
 -------------------------------------------------------------------------------
 Initial Component States:
 
-Cst1 output: 0
+Cst1 run: 0
 
-Cst2 output: 1
+Cst2 run: 1
 
-Clk output: 0
+Clk run: 0
 
-Reg1 output: 0; Current registry: [0, 0, 0, 0]
+Reg1 run: 0; Current registry: [0, 0, 0, 0]
 
-Reg2 output: 0; Current registry: [1, 1, 1, 0]
+Reg2 run: 0; Current registry: [1, 1, 1, 0]
 
-And1 output: 0
+And1 run: 0
 
-And2 output: 0
+And2 run: 0
 
-Or1 output: 0
+Or1 run: 0
 
-Reg3 output: 0; Current registry: [None, None, None, None]
+Reg3 run: 0; Current registry: [None, None, None, None]
 
 
 -------------------------------------------------------------------------------
@@ -52,184 +52,184 @@ Simulation Start
 RUN 1:
 
 
-Cst1 output: 0
+Cst1 run: 0
 
-Cst2 output: 1
+Cst2 run: 1
 
-Clk output: 1
+Clk run: 1
 
-Reg1 output: 0; Current registry: [None, 0, 0, 0]
+Reg1 run: 0; Current registry: [None, 0, 0, 0]
 
-Reg2 output: 1; Current registry: [1, 1, 0, None]
+Reg2 run: 1; Current registry: [1, 1, 0, None]
 
-And1 output: 0
+And1 run: 0
 
-And2 output: 1
+And2 run: 1
 
-Or1 output: 1
+Or1 run: 1
 
-Reg3 output: None; Current registry: [1, None, None, None]
+Reg3 run: None; Current registry: [1, None, None, None]
 
 
 -------------------------------------------------------------------------------
 RUN 2:
 
 
-Cst1 output: 0
+Cst1 run: 0
 
-Cst2 output: 1
+Cst2 run: 1
 
-Clk output: 0
+Clk run: 0
 
-Reg1 output: 0; Current registry: [None, 0, 0, 0]
+Reg1 run: 0; Current registry: [None, 0, 0, 0]
 
-Reg2 output: 1; Current registry: [1, 1, 0, None]
+Reg2 run: 1; Current registry: [1, 1, 0, None]
 
-And1 output: 0
+And1 run: 0
 
-And2 output: 1
+And2 run: 1
 
-Or1 output: 1
+Or1 run: 1
 
-Reg3 output: None; Current registry: [1, None, None, None]
+Reg3 run: None; Current registry: [1, None, None, None]
 
 
 -------------------------------------------------------------------------------
 RUN 3:
 
 
-Cst1 output: 0
+Cst1 run: 0
 
-Cst2 output: 1
+Cst2 run: 1
 
-Clk output: 1
+Clk run: 1
 
-Reg1 output: 0; Current registry: [None, None, 0, 0]
+Reg1 run: 0; Current registry: [None, None, 0, 0]
 
-Reg2 output: 1; Current registry: [1, 0, None, None]
+Reg2 run: 1; Current registry: [1, 0, None, None]
 
-And1 output: 0
+And1 run: 0
 
-And2 output: 1
+And2 run: 1
 
-Or1 output: 1
+Or1 run: 1
 
-Reg3 output: None; Current registry: [1, 1, None, None]
+Reg3 run: None; Current registry: [1, 1, None, None]
 
 
 -------------------------------------------------------------------------------
 RUN 4:
 
 
-Cst1 output: 0
+Cst1 run: 0
 
-Cst2 output: 1
+Cst2 run: 1
 
-Clk output: 0
+Clk run: 0
 
-Reg1 output: 0; Current registry: [None, None, 0, 0]
+Reg1 run: 0; Current registry: [None, None, 0, 0]
 
-Reg2 output: 1; Current registry: [1, 0, None, None]
+Reg2 run: 1; Current registry: [1, 0, None, None]
 
-And1 output: 0
+And1 run: 0
 
-And2 output: 1
+And2 run: 1
 
-Or1 output: 1
+Or1 run: 1
 
-Reg3 output: None; Current registry: [1, 1, None, None]
+Reg3 run: None; Current registry: [1, 1, None, None]
 
 
 -------------------------------------------------------------------------------
 RUN 5:
 
 
-Cst1 output: 0
+Cst1 run: 0
 
-Cst2 output: 1
+Cst2 run: 1
 
-Clk output: 1
+Clk run: 1
 
-Reg1 output: 0; Current registry: [None, None, None, 0]
+Reg1 run: 0; Current registry: [None, None, None, 0]
 
-Reg2 output: 1; Current registry: [0, None, None, None]
+Reg2 run: 1; Current registry: [0, None, None, None]
 
-And1 output: 0
+And1 run: 0
 
-And2 output: 1
+And2 run: 1
 
-Or1 output: 1
+Or1 run: 1
 
-Reg3 output: None; Current registry: [1, 1, 1, None]
+Reg3 run: None; Current registry: [1, 1, 1, None]
 
 
 -------------------------------------------------------------------------------
 RUN 6:
 
 
-Cst1 output: 0
+Cst1 run: 0
 
-Cst2 output: 1
+Cst2 run: 1
 
-Clk output: 0
+Clk run: 0
 
-Reg1 output: 0; Current registry: [None, None, None, 0]
+Reg1 run: 0; Current registry: [None, None, None, 0]
 
-Reg2 output: 1; Current registry: [0, None, None, None]
+Reg2 run: 1; Current registry: [0, None, None, None]
 
-And1 output: 0
+And1 run: 0
 
-And2 output: 1
+And2 run: 1
 
-Or1 output: 1
+Or1 run: 1
 
-Reg3 output: None; Current registry: [1, 1, 1, None]
+Reg3 run: None; Current registry: [1, 1, 1, None]
 
 
 -------------------------------------------------------------------------------
 RUN 7:
 
 
-Cst1 output: 0
+Cst1 run: 0
 
-Cst2 output: 1
+Cst2 run: 1
 
-Clk output: 1
+Clk run: 1
 
-Reg1 output: 0; Current registry: [None, None, None, None]
+Reg1 run: 0; Current registry: [None, None, None, None]
 
-Reg2 output: 0; Current registry: [None, None, None, None]
+Reg2 run: 0; Current registry: [None, None, None, None]
 
-And1 output: 0
+And1 run: 0
 
-And2 output: 0
+And2 run: 0
 
-Or1 output: 0
+Or1 run: 0
 
-Reg3 output: None; Current registry: [0, 1, 1, 1]
+Reg3 run: None; Current registry: [0, 1, 1, 1]
 
 
 -------------------------------------------------------------------------------
 RUN 8:
 
 
-Cst1 output: 0
+Cst1 run: 0
 
-Cst2 output: 1
+Cst2 run: 1
 
-Clk output: 0
+Clk run: 0
 
-Reg1 output: 0; Current registry: [None, None, None, None]
+Reg1 run: 0; Current registry: [None, None, None, None]
 
-Reg2 output: 0; Current registry: [None, None, None, None]
+Reg2 run: 0; Current registry: [None, None, None, None]
 
-And1 output: 0
+And1 run: 0
 
-And2 output: 0
+And2 run: 0
 
-Or1 output: 0
+Or1 run: 0
 
-Reg3 output: None; Current registry: [0, 1, 1, 1]
+Reg3 run: None; Current registry: [0, 1, 1, 1]
 
 
 -------------------------------------------------------------------------------

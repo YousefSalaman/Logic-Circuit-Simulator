@@ -3,7 +3,7 @@ import LogicCircuitSimulator.src as comps
 # The objects below are grouped by layers. Note that everything is aptly named (the classes), so it can be read easier.
 
 # Layer 1
-a = comps.ConstOut('Cst1', 0)  # Constant output object
+a = comps.ConstOut('Cst1', 0)  # Constant run object
 b = comps.ConstOut('Cst2', 1)
 c = comps.Clock('Clk')  # Clock object
 

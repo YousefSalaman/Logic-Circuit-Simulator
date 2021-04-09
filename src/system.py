@@ -7,7 +7,7 @@ class DigitalSystem:
     """
     The digital system class. Its role is to evaluate the system.
 
-    It basically runs through every component to get the current output in that
+    It basically runs through every component to get the current run in that
     run. With that, it creates a file that display how the system was running
     in each iteration.
     """
@@ -40,10 +40,10 @@ class DigitalSystem:
 
         It does the following to do this:
 
-        - It creates the simulation header. That is, the starting 
+        - It creates the simulation header. That is, the starting
           text and it shows the components initial conditions.
 
-        - It later runs through each component and gets the current output of
+        - It later runs through each component and gets the current run of
           the component.
 
         - With all the information it has gathered, it will build the text file
@@ -58,9 +58,8 @@ class DigitalSystem:
     def _create_simulation_file(self, sim_text):
 
         sim_text += 'Simulation End\n\n'
-        sim_file = open(f'{self.name}.txt', 'w')
-        sim_file.write(sim_text)
-        sim_file.close()
+        with open(f'{self.name}.txt', 'w') as sim_file:
+            sim_file.write(sim_text)
 
     def _create_simulation_header(self):
 
@@ -99,12 +98,12 @@ class DigitalSystem:
 
         run_count = 1
         while run_count != self.run_max:
-            run_str = ""  # String to save the output of components
+            run_str = ""  # String to save the run of components
             for dig_comp in it.chain.from_iterable(self.layered_comps):  # Go through each component in each layer
-                dig_comp_inputs = [comp_input.output for comp_input in self.sys_connections[dig_comp]]  # Get inputs
+                dig_comp_inputs = [comp_input.run for comp_input in self.sys_connections[dig_comp]]  # Get inputs
                 try:
-                    dig_comp.component_output(dig_comp_inputs)
-                    run_str += dig_comp.component_print()  # Add output of component to current run string
+                    dig_comp.run(dig_comp_inputs)
+                    run_str += dig_comp.component_print()  # Add run of component to current run string
 
                 # This creates an early stop to prevent any invalid data from appearing in the simulation
                 except TypeError:

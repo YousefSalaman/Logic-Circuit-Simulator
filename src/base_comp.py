@@ -19,10 +19,10 @@ class DigitalComponent(ABC):
 
         return self.name
 
-    def component_print(self):
+    def print(self):
 
-        return f'{self.name} output: {self.output}\n\n'
+        return f'{self.name} run: {self.output}\n\n'
 
     @abstractmethod
-    def component_output(self, inputs):
+    def run(self, inputs):
         pass

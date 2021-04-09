@@ -18,11 +18,7 @@ class MUX(DigitalComponent):
     - If s0 = s1 = 1, then the fourth input will be routed.
     """
 
-    def __init__(self, name, init_state=0):
-
-        super().__init__(name, init_state)
-
-    def component_output(self, inputs):
+    def run(self, inputs):
 
         s0, s1, *comp_inputs = inputs
 
