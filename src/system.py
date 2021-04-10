@@ -12,12 +12,12 @@ class DigitalSystem:
     in each iteration.
     """
 
-    def __init__(self, name, system_connections, num_of_runs=20):
+    def __init__(self, name, connections, num_of_runs=20):
 
         self.name = name
         self.layered_comps = []
         self.run_max = num_of_runs + 1
-        self.sys_connections = system_connections
+        self.connections = connections
 
         self.organize_system()
 
@@ -27,7 +27,7 @@ class DigitalSystem:
         an order of execution for the components in the system.
         """
 
-        for comp in self.sys_connections:
+        for comp in self.connections:
             if comp.layer_num is None:
                 self._traverse_system(comp)
 
@@ -79,7 +79,7 @@ class DigitalSystem:
 
     def _map_component_to_layer(self, comp):
 
-        comp_inputs = self.sys_connections[comp]
+        comp_inputs = self.connections[comp]
         if len(comp_inputs) == 0:  # If component does not have any inputs, put in first layer
             comp.layer_num = 0
         else:  # Verify the inputs layer numbers and use the highest number + 1 as the current component's layer number
@@ -97,23 +97,23 @@ class DigitalSystem:
         """
 
         run_count = 1
+        ordered_comps = list(it.chain.from_iterable(self.layered_comps))  # Get a flat version of the ordered components
+
         while run_count != self.run_max:
             run_str = ""  # String to save the run of components
-            for dig_comp in it.chain.from_iterable(self.layered_comps):  # Go through each component in each layer
-                dig_comp_inputs = [comp_input.run for comp_input in self.sys_connections[dig_comp]]  # Get inputs
+            for dig_comp in ordered_comps:  # Go through each component in each layer
+                dig_comp_inputs = [comp_input.output for comp_input in self.connections[dig_comp]]  # Get inputs
                 try:
                     dig_comp.run(dig_comp_inputs)
-                    run_str += dig_comp.component_print()  # Add run of component to current run string
-
-                # This creates an early stop to prevent any invalid data from appearing in the simulation
-                except TypeError:
+                    run_str += dig_comp.print()  # Add run of component to current run string
+                except TypeError:  # Create an early stop to prevent any invalid data from appearing in the simulation
                     return
             yield f'RUN {run_count}:\n\n\n' + run_str + _LINE_STR
             run_count += 1
 
     def _traverse_system(self, comp):
 
-        for comp_input in self.sys_connections[comp]:
+        for comp_input in self.connections[comp]:
             if comp_input.layer_num is None:
                 self._traverse_system(comp_input)
         self._map_component_to_layer(comp)

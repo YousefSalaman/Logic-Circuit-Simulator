@@ -1,4 +1,8 @@
+
+import itertools as it
+
 import LogicCircuitSimulator.src as comps
+
 
 a = comps.ConstOut('Cst1', 0)
 
@@ -17,59 +21,38 @@ g = comps.Gate('And4', 'and')
 connection_dict = {a: [], b: [], c: [], g: [c, d], d: [a, b, c], e: [b, c], f: [d, e]}
 
 
-def order1(connection_dict):
-    layer1 = []
+def organize_comps(connections):
 
-    for key in connection_dict:
+    # Create comp_layers and append the first layer
+    layers = [[comp for comp in connections if connections[comp] == []]]
 
-        if connection_dict[key] == []:
-            layer1.append(key)
+    comp_count = len(layers[0])
+    num_of_comps = len(connections)
+    while comp_count != num_of_comps:
 
-    return layer1
-
-
-def order2(connection_dict, layer_list):
-    layer = []
-
-    for key in connection_dict:
-
-        count = 0
-
-        for value in connection_dict[key]:
-
-            if value not in layer_list:
-
-                break
-
-            else:
-
-                count += 1
-
-        if count >= 1 and key not in layer:
-            layer.append(key)
-
-    return layer
-
-
-def layer_list(connection_dict):
-    layers = [order1(connection_dict)]
-
-    index = 0
-
-    comps = 0
-
-    while comps != len(connection_dict):
-
-        layers.append(order2(connection_dict, layers[index]))
-
-        index += 1
-
-        comps = 0
-
-        for layer in layers:
-            comps += len(layer)
+        # Create new layer and update component counter
+        new_layer = _create_layer(connections, layers)
+        layers.append(new_layer)
+        comp_count += len(new_layer)
 
     return layers
 
 
-print(layer_list(connection_dict))
+def _create_layer(connections, layer_list):
+
+    # List of components that have been organized/mapped into a layer
+    mapped_comps = list(it.chain.from_iterable(layer_list))
+
+    layer = []
+    for comp, input_comps in connections.items():
+        if comp not in layer \
+                and comp not in mapped_comps \
+                and all(input_comp in mapped_comps for input_comp in input_comps):
+
+            layer.append(comp)
+
+    return layer
+
+
+comp_layers = organize_comps(connection_dict)
+print(comp_layers)
