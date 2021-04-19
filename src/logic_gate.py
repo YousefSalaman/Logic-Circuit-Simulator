@@ -43,10 +43,10 @@ class Gate(DigitalComponent):  # This class uses the commutativity of the logica
         # Checks once if the gate has the correct amount of reg_inputs
         input_len = len(inputs)
         if input_len == 1:
-            raise AttributeError("A Gate component must have 2 or more reg_inputs.")
-        elif input_len > 2 and self.gate in ["NAND", "NOR"]:
+            raise AttributeError("A Gate component must have 2 or more inputs.")
+        elif input_len > 2 and self.gate in ("NAND", "NOR"):
             raise AttributeError(f'"{self.name}", which is a {self.gate} gate, '
-                                 'cannot receive more than two reg_inputs.')
+                                 'cannot receive more than two inputs.')
 
     def run(self, inputs):
 

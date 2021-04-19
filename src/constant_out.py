@@ -9,7 +9,6 @@ class ConstOut(DigitalComponent):
     """
 
     def run(self, inputs):
-
         pass
 
     def verify(self, inputs):
