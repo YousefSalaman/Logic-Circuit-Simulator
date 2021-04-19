@@ -30,3 +30,8 @@ class MUX(DigitalComponent):
             self.output = comp_inputs[2]
         else:
             self.output = comp_inputs[3]
+
+    def verify(self, inputs):
+
+        if len(inputs) != 2:
+            raise AttributeError("A MUX component can only have 2 inputs.")

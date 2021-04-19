@@ -21,6 +21,8 @@ class DigitalSystem:
 
         self.organize_system()
 
+    # System organization methods
+
     def organize_system(self):
         """
         This method traverses through the connections it was given to determine
@@ -30,6 +32,27 @@ class DigitalSystem:
         for comp in self.connections:
             if comp.layer_num is None:
                 self._traverse_system(comp)
+
+    def _traverse_system(self, comp):
+
+        for comp_input in self.connections[comp]:
+            if comp_input.layer_num is None:
+                self._traverse_system(comp_input)
+        self._map_component_to_layer(comp)
+
+    def _map_component_to_layer(self, comp):
+
+        comp_inputs = self.connections[comp]
+        if len(comp_inputs) == 0:  # If component does not have any inputs, put in first layer
+            comp.layer_num = 0
+        else:  # Verify the inputs layer numbers and use the highest number + 1 as the current component's layer number
+            comp.layer_num = max(comp_input.layer_num for comp_input in comp_inputs) + 1
+
+        if len(self.layered_comps) <= comp.layer_num:
+            self.layered_comps.append([])
+        self.layered_comps[comp.layer_num].append(comp)
+
+    # Running system methods
 
     def run_system(self):
         """
@@ -50,16 +73,16 @@ class DigitalSystem:
           with all the runs of the simulation.
         """
 
+        self._verify_components()
         sim_text = self._create_simulation_header()
         for run_str in self._run_components():
             sim_text += run_str
         self._create_simulation_file(sim_text)
 
-    def _create_simulation_file(self, sim_text):
+    def _verify_components(self):
 
-        sim_text += 'Simulation End\n\n'
-        with open(f'{self.name}.txt', 'w') as sim_file:
-            sim_file.write(sim_text)
+        for comp, inputs in self.connections.items():
+            comp.verify(inputs)
 
     def _create_simulation_header(self):
 
@@ -71,23 +94,11 @@ class DigitalSystem:
             start_str += f'Layer {layer_num + 1}:\n\n'
             for dig_comp in dig_comp_layer:
                 start_str += f'\t{dig_comp.name}'
-                init_out_str += dig_comp.component_print()
+                init_out_str += dig_comp.print()
             start_str += "\n\n"
 
         return start_str + _LINE_STR + 'Initial Component States:\n\n' \
                + init_out_str + _LINE_STR + "Simulation Start\n" + _LINE_STR
-
-    def _map_component_to_layer(self, comp):
-
-        comp_inputs = self.connections[comp]
-        if len(comp_inputs) == 0:  # If component does not have any inputs, put in first layer
-            comp.layer_num = 0
-        else:  # Verify the inputs layer numbers and use the highest number + 1 as the current component's layer number
-            comp.layer_num = max(comp_input.layer_num for comp_input in comp_inputs) + 1
-
-        if len(self.layered_comps) <= comp.layer_num:
-            self.layered_comps.append([])
-        self.layered_comps[comp.layer_num].append(comp)
 
     def _run_components(self):
         """
@@ -111,9 +122,8 @@ class DigitalSystem:
             yield f'RUN {run_count}:\n\n\n' + run_str + _LINE_STR
             run_count += 1
 
-    def _traverse_system(self, comp):
+    def _create_simulation_file(self, sim_text):
 
-        for comp_input in self.connections[comp]:
-            if comp_input.layer_num is None:
-                self._traverse_system(comp_input)
-        self._map_component_to_layer(comp)
+        sim_text += 'Simulation End\n\n'
+        with open(f'{self.name}.txt', 'w') as sim_file:
+            sim_file.write(sim_text)

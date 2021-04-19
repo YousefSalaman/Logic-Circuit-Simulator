@@ -10,5 +10,9 @@ class ConstOut(DigitalComponent):
 
     def run(self, inputs):
 
-        if inputs:
-            raise AttributeError("Constant run objects cannot have any inputs.")
+        pass
+
+    def verify(self, inputs):
+
+        if len(inputs) != 0:
+            raise AttributeError("A constant output component cannot have any inputs.")

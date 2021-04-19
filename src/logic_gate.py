@@ -22,7 +22,6 @@ class Gate(DigitalComponent):  # This class uses the commutativity of the logica
 
     def __init__(self, name, gate, init_state=0):
 
-        self._checked = False
         self._verify_gate_parameter(gate)
 
         super().__init__(name, init_state)
@@ -39,21 +38,17 @@ class Gate(DigitalComponent):  # This class uses the commutativity of the logica
             raise AttributeError('The parameter "gate" must be a string and it must be '
                                  f'one of the following: {", ".join(self._TRUTH_TABLE)}') from error
 
-    def verify_component_inputs(self, inputs):
+    def verify(self, inputs):
 
         # Checks once if the gate has the correct amount of reg_inputs
-        if not self._checked:
-            input_len = len(inputs)
-            if input_len == 1:
-                raise AttributeError("A Gate component must have 2 or more reg_inputs.")
-            elif input_len > 2 and self.gate in ["NAND", "NOR"]:
-                raise AttributeError(f'"{self.name}", which is a {self.gate} gate, '
-                                     'cannot receive more than two reg_inputs.')
-            self._checked = True
+        input_len = len(inputs)
+        if input_len == 1:
+            raise AttributeError("A Gate component must have 2 or more reg_inputs.")
+        elif input_len > 2 and self.gate in ["NAND", "NOR"]:
+            raise AttributeError(f'"{self.name}", which is a {self.gate} gate, '
+                                 'cannot receive more than two reg_inputs.')
 
     def run(self, inputs):
-
-        self.verify_component_inputs(inputs)
 
         output = self._TRUTH_TABLE[self.gate][inputs[0] + inputs[1]]  # Lookup the value in the truth table
 

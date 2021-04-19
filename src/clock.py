@@ -13,7 +13,9 @@ class Clock(DigitalComponent):
 
     def run(self, inputs):
 
-        if not inputs:
-            self.output = int(not self.output)  # This alternates the run between 0 and 1
-        else:
-            raise Exception("Clock objects cannot have any inputs.")
+        self.output = int(not self.output)  # This alternates the run between 0 and 1
+
+    def verify(self, inputs):
+
+        if len(inputs) != 0:
+            raise AttributeError("A clock component cannot have inputs")

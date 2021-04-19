@@ -3,9 +3,7 @@ from abc import abstractmethod, ABC
 
 
 class DigitalComponent(ABC):
-    """
-    Base class for the project's digital components.
-    """
+    """Base class for the project's digital components."""
 
     def __init__(self, name, init_state=0):
 
@@ -20,9 +18,14 @@ class DigitalComponent(ABC):
         return self.name
 
     def print(self):
+        """Print the current state of the component."""
 
         return f'{self.name} run: {self.output}\n\n'
 
     @abstractmethod
     def run(self, inputs):
-        pass
+        """Run the component."""
+
+    @abstractmethod
+    def verify(self, inputs):
+        """Verify the inputs of the component."""

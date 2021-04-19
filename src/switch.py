@@ -21,19 +21,23 @@ class Switch(DigitalComponent):
     switch component. For the other, you connect 2 inputs.
     """
 
-    def run(self, inputs):
+    def verify(self, inputs):
+        """Assign the mode operation based on the inputs."""
 
-        route_value, *comp_inputs = inputs
-
-        input_len = len(comp_inputs)
-        if input_len == 1:  # On-off switch mode
-            self._on_off_switch(route_value, comp_inputs[0])
-        elif input_len == 2:  # 2x1 MUX mode
-            self._2_by_1_mux(route_value, comp_inputs)
+        input_size = len(inputs)
+        if input_size == 1:
+            self.run = self._on_off_switch
+        elif input_size == 2:
+            self.run = self._2_by_1_mux
         else:
-            raise ValueError("There can only be up to 3 inputs for a switch component.")
+            raise AttributeError("A switch component must have either 1 or 2 inputs.")
 
-    def _2_by_1_mux(self, route_value, comp_inputs):
+    # Running switch methods
+
+    def run(self, inputs):
+        pass
+
+    def _2_by_1_mux(self, inputs):
         """
         The behavior of the data routing switch.
 
@@ -46,12 +50,10 @@ class Switch(DigitalComponent):
           run of the switch.
         """
 
-        if route_value == 0:
-            self.output = comp_inputs[0]
-        else:
-            self.output = comp_inputs[1]
+        route_value, *comp_inputs = inputs
+        self.output = comp_inputs[route_value]
 
-    def _on_off_switch(self, route_value, comp_input):
+    def _on_off_switch(self, inputs):
         """
         The behavior of an on-off switch.
 
@@ -62,5 +64,6 @@ class Switch(DigitalComponent):
           as the run.
         """
 
+        route_value, comp_input = inputs
         if route_value == 1:  # The on state is represented by 1
             self.output = comp_input

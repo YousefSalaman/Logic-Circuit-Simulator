@@ -36,6 +36,23 @@ class UniversalReg(DigitalComponent):
         else:
             raise ValueError('Either "size" or "load_input" have to be specified to create a Register object.')
 
+    def print(self):
+
+        run_str = super().print().replace("\n\n", "")
+        if self.prev_state == (1, 0):
+            self.reg_bits.reverse()
+            run_str += f'; Current registry: {self.reg_bits}'
+            self.reg_bits.reverse()
+        else:
+            run_str += f'; Current registry: {self.reg_bits}'
+        return run_str + '\n\n'
+
+    def verify(self, inputs):
+
+        super().verify(inputs)
+
+    # Running USR methods
+
     def run(self, inputs):
 
         s0, s1, reg_enable, crtl_enable, clear, *reg_inputs = inputs
@@ -47,17 +64,6 @@ class UniversalReg(DigitalComponent):
             curr_state = (s0, s1)
             if curr_state != (0, 0):
                 self.prev_state = curr_state
-
-    def print(self):
-
-        run_str = super().print().replace("\n\n", "")
-        if self.prev_state == (1, 0):
-            self.reg_bits.reverse()
-            run_str += f'; Current registry: {self.reg_bits}'
-            self.reg_bits.reverse()
-        else:
-            run_str += f'; Current registry: {self.reg_bits}'
-        return run_str + '\n\n'
 
     def _register_outputs(self, s0, s1, reg_inputs):
         """
