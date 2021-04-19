@@ -40,7 +40,7 @@ class Gate(DigitalComponent):  # This class uses the commutativity of the logica
 
     def verify(self, inputs):
 
-        # Checks once if the gate has the correct amount of reg_inputs
+        # Checks once if the gate has the correct amount of inputs
         input_len = len(inputs)
         if input_len == 1:
             raise AttributeError("A Gate component must have 2 or more inputs.")
@@ -52,8 +52,9 @@ class Gate(DigitalComponent):  # This class uses the commutativity of the logica
 
         output = self._TRUTH_TABLE[self.gate][inputs[0] + inputs[1]]  # Lookup the value in the truth table
 
-        # Since some of the components are associative, I can continually use the previous value and a new input to get
-        # or lookup the new value for the component
+        # Since some of the components are associative, I can continually
+        # use the previous value and a new input to lookup the new value
+        # for the component
         for comp_input in inputs[2:]:
             output = self._TRUTH_TABLE[self.gate][output + comp_input]
         self.output = output
