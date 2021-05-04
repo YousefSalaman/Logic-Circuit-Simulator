@@ -58,17 +58,17 @@ Cst2 run: 1
 
 Clk run: 1
 
-Reg1 run: 0; Current registry: [None, 0, 0, 0]
+Reg1 run: 0; Current registry: [0, 0, 0, None]
 
-Reg2 run: 1; Current registry: [1, 1, 0, None]
+Reg2 run: 0; Current registry: [None, 1, 1, 1]
 
 And1 run: 0
 
-And2 run: 1
+And2 run: 0
 
-Or1 run: 1
+Or1 run: 0
 
-Reg3 run: None; Current registry: [1, None, None, None]
+Reg3 run: None; Current registry: [None, None, None, 0]
 
 
 -------------------------------------------------------------------------------
@@ -81,17 +81,17 @@ Cst2 run: 1
 
 Clk run: 0
 
-Reg1 run: 0; Current registry: [None, 0, 0, 0]
+Reg1 run: 0; Current registry: [0, 0, 0, None]
 
-Reg2 run: 1; Current registry: [1, 1, 0, None]
+Reg2 run: 0; Current registry: [None, 1, 1, 1]
 
 And1 run: 0
 
-And2 run: 1
+And2 run: 0
 
-Or1 run: 1
+Or1 run: 0
 
-Reg3 run: None; Current registry: [1, None, None, None]
+Reg3 run: None; Current registry: [None, None, None, 0]
 
 
 -------------------------------------------------------------------------------
@@ -104,9 +104,9 @@ Cst2 run: 1
 
 Clk run: 1
 
-Reg1 run: 0; Current registry: [None, None, 0, 0]
+Reg1 run: 0; Current registry: [0, 0, None, None]
 
-Reg2 run: 1; Current registry: [1, 0, None, None]
+Reg2 run: 1; Current registry: [None, None, 1, 1]
 
 And1 run: 0
 
@@ -114,7 +114,7 @@ And2 run: 1
 
 Or1 run: 1
 
-Reg3 run: None; Current registry: [1, 1, None, None]
+Reg3 run: None; Current registry: [None, None, 0, 1]
 
 
 -------------------------------------------------------------------------------
@@ -127,9 +127,9 @@ Cst2 run: 1
 
 Clk run: 0
 
-Reg1 run: 0; Current registry: [None, None, 0, 0]
+Reg1 run: 0; Current registry: [0, 0, None, None]
 
-Reg2 run: 1; Current registry: [1, 0, None, None]
+Reg2 run: 1; Current registry: [None, None, 1, 1]
 
 And1 run: 0
 
@@ -137,7 +137,7 @@ And2 run: 1
 
 Or1 run: 1
 
-Reg3 run: None; Current registry: [1, 1, None, None]
+Reg3 run: None; Current registry: [None, None, 0, 1]
 
 
 -------------------------------------------------------------------------------
@@ -150,9 +150,9 @@ Cst2 run: 1
 
 Clk run: 1
 
-Reg1 run: 0; Current registry: [None, None, None, 0]
+Reg1 run: 0; Current registry: [0, None, None, None]
 
-Reg2 run: 1; Current registry: [0, None, None, None]
+Reg2 run: 1; Current registry: [None, None, None, 1]
 
 And1 run: 0
 
@@ -160,7 +160,7 @@ And2 run: 1
 
 Or1 run: 1
 
-Reg3 run: None; Current registry: [1, 1, 1, None]
+Reg3 run: None; Current registry: [None, 0, 1, 1]
 
 
 -------------------------------------------------------------------------------
@@ -173,9 +173,9 @@ Cst2 run: 1
 
 Clk run: 0
 
-Reg1 run: 0; Current registry: [None, None, None, 0]
+Reg1 run: 0; Current registry: [0, None, None, None]
 
-Reg2 run: 1; Current registry: [0, None, None, None]
+Reg2 run: 1; Current registry: [None, None, None, 1]
 
 And1 run: 0
 
@@ -183,7 +183,7 @@ And2 run: 1
 
 Or1 run: 1
 
-Reg3 run: None; Current registry: [1, 1, 1, None]
+Reg3 run: None; Current registry: [None, 0, 1, 1]
 
 
 -------------------------------------------------------------------------------
@@ -198,13 +198,13 @@ Clk run: 1
 
 Reg1 run: 0; Current registry: [None, None, None, None]
 
-Reg2 run: 0; Current registry: [None, None, None, None]
+Reg2 run: 1; Current registry: [None, None, None, None]
 
 And1 run: 0
 
-And2 run: 0
+And2 run: 1
 
-Or1 run: 0
+Or1 run: 1
 
 Reg3 run: None; Current registry: [0, 1, 1, 1]
 
@@ -221,13 +221,13 @@ Clk run: 0
 
 Reg1 run: 0; Current registry: [None, None, None, None]
 
-Reg2 run: 0; Current registry: [None, None, None, None]
+Reg2 run: 1; Current registry: [None, None, None, None]
 
 And1 run: 0
 
-And2 run: 0
+And2 run: 1
 
-Or1 run: 0
+Or1 run: 1
 
 Reg3 run: None; Current registry: [0, 1, 1, 1]
 
