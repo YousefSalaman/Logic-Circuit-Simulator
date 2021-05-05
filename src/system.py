@@ -4,8 +4,7 @@ _LINE_STR = '\n-----------------------------------------------------------------
 
 
 class DigitalSystem:
-    """
-    The digital system class. Its role is to evaluate the system.
+    """The digital system class. Its role is to evaluate the system.
 
     It basically runs through every component to get the current run in that
     run. With that, it creates a file that display how the system was running
@@ -55,8 +54,7 @@ class DigitalSystem:
     # Running system methods
 
     def run_system(self):
-        """
-        Run the digital system.
+        """Run the digital system.
 
         It creates the simulation text by running the system. The results of
         these will depend on what components you handed to the system.

@@ -5,21 +5,20 @@ from .base_comp import DigitalComponent
 
 
 class UniversalReg(DigitalComponent):
-    """
-    Universal Shift Register (USR) component.
+    """Universal Shift Register (USR) component.
 
-    This component behaves like a USR. It has the has the following pins:
+    It has the has the following pins:
 
     - s0 and s1: These two pins determine the mode of operation. Here are the
       possible combinations:
 
       - s0 = 0 and s1 = 0: Idle state (USR won't do anything)
 
-      - s0 = 0 and s1 = 1: Right shift elements
+      - s0 = 0 and s1 = 1: Left shift elements
 
-      - s0 = 1 and s1 = 0: Left shift elements
+      - s0 = 1 and s1 = 0: Right shift elements
 
-      - s0 = 1 and s1 = 1: Parallel shift elements
+      - s0 = 1 and s1 = 1: Parallel load elements
 
     - clk: This pin must be 1 for the register to output a value.
     """
@@ -41,25 +40,23 @@ class UniversalReg(DigitalComponent):
         run_str = super().print().replace("\n\n", "")
         return run_str + f'; Current registry: {list(self.reg_bits)}\n\n'
 
-    def verify(self, inputs):
-
-        super().verify(inputs)
-
-    # Running USR methods
-
     def run(self, inputs):
 
         s0, s1, clk, *reg_inputs = inputs
-        if len(reg_inputs) == 0:
+        if len(reg_inputs) == 0:  # If no inputs are entered, put None as defaults
             reg_inputs = [None] * self._REG_SIZE
 
         if clk == 1:  # If clk is one, then the register will output values
-            if not s0 and s1:
+            if not s0 and s1:  # Shift left
                 self.output = self.reg_bits.popleft()
                 self.reg_bits.append(reg_inputs[0])
-            if s0 and not s1:
+            if s0 and not s1:  # Shift right
                 self.output = self.reg_bits.pop()
                 self.reg_bits.appendleft(reg_inputs[0])
             elif s0 == s1:  # Parallel load
                 self.output = self.reg_bits
                 self[:] = reg_inputs
+
+    def verify(self, inputs):
+
+        super().verify(inputs)
