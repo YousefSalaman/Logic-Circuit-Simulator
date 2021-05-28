@@ -3,7 +3,7 @@ import LogicCircuitSimulator.src as comps
 # The objects below are grouped by layers. Note that everything is aptly named (the classes), so it can be read easier.
 
 # Layer 1
-a = comps.ConstOut('Cst1', 0)  # Constant run object
+a = comps.ConstOut('Cst1', 0)  # Constant output object
 b = comps.ConstOut('Cst2', 1)
 c = comps.Clock('Clk')  # Clock object
 
@@ -22,7 +22,7 @@ g = comps.Gate('And2', "and")
 h = comps.Gate('Or1', "or")  # Gate object set to "or"
 
 # Layer 5
-i = comps.UniversalReg('Reg3')
+i = comps.UniversalReg('Reg3', 4)
 
 # The code will organize these objects as follows: [[a, b, c], [d, e], [f, g], [h], [i]] and use that as the execution
 # order to get the correct values. Notice that this reflects the layers above. The text file also illustrates this
@@ -31,8 +31,8 @@ i = comps.UniversalReg('Reg3')
 # The connection_dict establishes the connections of the system. For a given component (key), the dictionary provides
 # its inputs (value)
 
-connection_dict = {a: [], b: [], c: [], d: [a, b, c], e: [b, a, c], f: [b, d], g: [e, b], h: [f, g],
-                   i: [a, b, c, h]}
+connection_dict = {a: [], b: [], c: [], d: [a, b, c, b, a], e: [b, a, c, b, a], f: [b, d], g: [e, b], h: [f, g],
+                   i: [a, b, c, b, a, h]}
 
 Test_Sys = comps.DigitalSystem('TestSys', connection_dict, num_of_runs=10)  # Test_Sys is a DigitalSystem object.
 
